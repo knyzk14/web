@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <script>
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Enter" && document.activeElement === message) {
+    send_dengon();
+  }
+});
+function send_dengon() {
+  if (message.value) {
+    dengon_area.innerText = message.value;
+    qrcodeimg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${ message.value }`;
+    message.value = "";
+    alert("伝言をセットしました");
+  } else {
+    alert("入力内容が空です");
+  }
+}
+</script>
+  </head>
+  <body>
+    <h1>伝言板</h1>
+    <p id="dengon_area">伝言はまだありません。</p>
+    <p><img id="qrcodeimg" alt="伝言のQRコード" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z/C/HgAGgwJ/lK3Q6wAAAABJRU5ErkJggg=="></p>
+    <input id="message" placeholder="伝言を入力...">
+    <button onclick="send_dengon();">セット</button>
+  </body>
+</html>
